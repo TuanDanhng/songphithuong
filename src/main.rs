@@ -2,7 +2,7 @@ use axum::{
     routing::get_service,
     Router,
 };
-use tower_http::services::fs::ServeDir;  // Đảm bảo bạn có import đúng
+use tower_http::services::fs::ServeDir;
 use std::net::SocketAddr;
 
 #[tokio::main]
@@ -14,7 +14,7 @@ async fn main() {
         }));
         
     // Lấy cổng từ biến môi trường PORT
-    let port = std::env::var("PORT").unwrap_or_else(|_| "3000".to_string());
+    let port = std::env::var("PORT").unwrap_or_else(|_| "8080".to_string());
     let addr: SocketAddr = SocketAddr::from(([0, 0, 0, 0], port.parse().unwrap()));
     println!("Listening on http://{}", addr);
 
