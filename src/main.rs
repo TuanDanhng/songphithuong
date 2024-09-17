@@ -13,7 +13,7 @@ async fn main() {
             (axum::http::StatusCode::INTERNAL_SERVER_ERROR, format!("Unhandled internal error: {}", error))
         }));
         
-    let addr: SocketAddr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let addr: SocketAddr = SocketAddr::from(([0, 0, 0, 0], 3000));
     println!("Listening on http://{}", addr);
 
     // Khởi chạy server
