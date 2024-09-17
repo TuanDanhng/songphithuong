@@ -2,7 +2,7 @@ use axum::{
     routing::get_service,
     Router,
 };
-use tower_http::services::ServeDir;
+use tower_http::services::fs::ServeDir;  // Đảm bảo bạn có import đúng
 use std::net::SocketAddr;
 
 #[tokio::main]
@@ -13,7 +13,9 @@ async fn main() {
             (axum::http::StatusCode::INTERNAL_SERVER_ERROR, format!("Unhandled internal error: {}", error))
         }));
         
-    let addr: SocketAddr = SocketAddr::from(([0, 0, 0, 0], 3000));
+    // Lấy cổng từ biến môi trường PORT
+    let port = std::env::var("PORT").unwrap_or_else(|_| "3000".to_string());
+    let addr: SocketAddr = SocketAddr::from(([0, 0, 0, 0], port.parse().unwrap()));
     println!("Listening on http://{}", addr);
 
     // Khởi chạy server
